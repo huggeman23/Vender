@@ -10,54 +10,71 @@ namespace Vender
 {
 
     public class Program
-    {   
+    {
+        public List<Products> collect = new List<Products>();
+        public void addProduct(string Type, string name)
+        {
+            int pID = collect.Count() + 1;
+            switch (Type) {
+                case "Drink":
+                      Drink drink = new Drink(pID, name);
+                      collect.Add(drink);
+                break;
+
+                case "Chips":
+                      Chips chips = new Chips(pID, name);
+                      collect.Add(chips);
+                break;
+
+                case "Gum":
+                      Gum gum = new Gum(pID, name);
+                      collect.Add(gum);
+                break;
+            }
+
+        }
         static void Main(string[] args)
         {
-        Vending vend = new Vending();
+        Program program = new Program();
+        IVender vend = new Vending();
 
-        Drink drink = new Drink(1,"Drink",15);
-        Chips chips = new Chips(2, "Chips", 20);
-        Gum gum = new Gum(3, "Gum", 12);
-       
-            List<Collection> collect = new List<Collection>();
-                       
-            collect.Add(drink);
-            collect.Add(chips);
-            collect.Add(gum);
-            
+            program.addProduct("Drink", "sprite");
+            program.addProduct("Chips", "dill");
+            program.addProduct("Chips", "cheese");
+            program.addProduct("Gum", "extra");
+            program.addProduct("Drink", "fanta");
             bool loop = true;
             while (loop==true)
             {
                 
-                Console.WriteLine("curent amount: "+vend.sum);
-                vend.ShowAll(collect);
-                Console.WriteLine("Insert mouney(4), exit and get change back(5)");
+                Console.WriteLine("curent amount: "+vend.pot());
+                
+                Console.WriteLine("show products(1), Insert mouney(2), exit and get change back(3)");
                 
                 int.TryParse(Console.ReadLine(), out int meny);
                 switch (meny)
                 {
                     case 1:
-                    case 2:
-                    case 3:
-                        foreach (var c in collect)
+                        vend.ShowAll(program.collect);
+                        int.TryParse(Console.ReadLine(), out int id);
+                        foreach (var c in program.collect)
                         {
-                            if (c.ID == meny)
+                            if (c.ID == id)
                             {
-                                var t = (c as Products);
 
-                                Console.WriteLine(t.Examin());
+                                Console.WriteLine(c.Examin());
                                 Console.WriteLine("purches write (1)");
 
                                 int.TryParse(Console.ReadLine(), out int select);
                                 
                                 if (select == 1 && vend.Purtches(c.prise))
                                     {
-                                    Console.WriteLine(c.Type + " was purtchesed would you like to use it write (1) if so");
+                                    Console.WriteLine(c.Name + " was purtchesed would you like to use it write (1) if so");
                                     int.TryParse(Console.ReadLine(), out int use);
 
                                     if (use == 1)
                                     {
-                                        Console.WriteLine(t.Use());
+                                        Console.WriteLine(c.Use());
                                     }
                                 }
                                 
@@ -65,12 +82,12 @@ namespace Vender
                         }
                         break;
 
-                    case 4:
+                    case 2:
                         Console.WriteLine("insert money into the mechine");
                         int.TryParse(Console.ReadLine(), out int insert);
                         vend.InsertMoney(insert);
                         break;
-                    case 5:
+                    case 3:
                         vend.EndTransaction();
                         loop= false;
                         break;

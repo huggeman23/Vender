@@ -8,16 +8,18 @@ namespace Vender.Models
 {
     public class Drink : Products
     {
-        public Drink(int id, string type, int pri) : base(id, type, pri)
+        public Drink(int id, string name) : base(id, name)
         {
+            Type = "Drink";
+            prise = 15;
         }
         public override string Examin()
         {
-            return $"{this.Type} prise:{this.prise}kr position: {this.ID}";
+            return $"{Name} type:{Type} prise:{prise}kr position: {ID}";
         }
         public override string Use()
         {
-            return "drink soda";
+            return $"drink {Name}";
         }
 
 

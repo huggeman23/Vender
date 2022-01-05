@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Chips.cs" />
-    <Compile Include="Models\Collection.cs" />
     <Compile Include="Models\Drink.cs" />
     <Compile Include="Models\Gum.cs" />
+    <Compile Include="Models\IVender.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,12 +7,17 @@ using Vender.Models;
 
 namespace Vender.VendingMechine
 {
-        public class Vending
+        public class Vending: IVender
         {
             //public int[] Denominations = new int[400];
-            public int[] Values = { 1000, 500, 100, 50, 20, 10, 5, 1 };
+            
+            public readonly int[] Values = { 1000, 500, 100, 50, 20, 10, 5, 1 };
             public double sum;
 
+        public double pot() 
+        {
+            return sum; 
+        }
             public bool Purtches(int prise)
             {
             bool purtchesCon;
@@ -30,13 +35,12 @@ namespace Vender.VendingMechine
                 return purtchesCon;
 
             }
-            public void ShowAll(List<Collection> products)
+            public void ShowAll(List<Products> products)
             {
             foreach (var product in products)
             {
-                Console.WriteLine($"{product.ID}: {product.Type} ");
+                Console.WriteLine($"{product.ID}: {product.Name} ");
             }
-
 
             }
             public void InsertMoney(int money)

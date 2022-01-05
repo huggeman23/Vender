@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace Vender.Models
 {
-    public abstract class Products : Collection
+    public abstract class Products
     {
-        public Products(int id, string type, int pri) : base(id, type, pri)
+        public int ID { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public int prise { get; set; }
+
+        public Products(int id, string name)
         {
+            ID = id;
+            Name = name;
         }
+        
         public abstract string Examin();
 
         public abstract string Use();

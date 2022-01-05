@@ -8,16 +8,18 @@ namespace Vender.Models
 {
     public class Gum : Products
     {
-        public Gum(int id, string type, int pri) : base(id, type, pri)
+        public Gum(int id, string name) : base(id, name)
         {
+            Type = "Gum";
+            prise = 12;
         }
         public override string Examin()
         {
-            return $"{this.Type} prise:{this.prise}kr position: {this.ID}";
+            return $"{Name} type:{Type} prise:{prise}kr position: {ID}";
         }
         public override string Use()
         {
-            return "chew gum";
+            return $"chew {Name}";
         }
     }
 }

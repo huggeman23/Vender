@@ -9,14 +9,6 @@ namespace Vender.Test
 {
     public class UnitTest1
     {
-       /* [Fact]
-        public void Test1()
-        {
-            var prog = new Program();
-            
-            Assert.Equal(20, prog.idSelect());
-
-        }*/
         
         [Theory]
         [InlineData(10,5,5)]
@@ -65,39 +57,53 @@ namespace Vender.Test
             Assert.Equal(0, vend.sum);
         }
 
-        Drink drink = new Drink(1, "Drink", 15);
-        Chips chips = new Chips(2, "Chips", 20);
-        Gum gum = new Gum(3, "Gum", 12);
+        Drink drink = new Drink(1, "Drink");
+        Chips chips = new Chips(2, "Chips");
+        Gum gum = new Gum(3, "Gum");
         [Fact]
         public void useDrink()
         {
-            Assert.Equal("drink soda",drink.Use());
+            Assert.Equal("drink Drink",drink.Use());
         }
         [Fact]
         public void useChips()
         {
-            Assert.Equal("eat chips", chips.Use());
+            Assert.Equal("eat Chips", chips.Use());
         }
         [Fact]
         public void useGum()
         {
-            Assert.Equal("chew gum", gum.Use());
+            Assert.Equal("chew Gum", gum.Use());
         }
         [Fact]
         public void examineDrink()
         {
-            Assert.Equal("Drink prise:15kr position: 1", drink.Examin());
+            Assert.Equal("Drink type:Drink prise:15kr position: 1", drink.Examin());
         }
         [Fact]
         public void examineChips()
         {
-            Assert.Equal("Chips prise:20kr position: 2", chips.Examin());
+            Assert.Equal("Chips type:Chips prise:20kr position: 2", chips.Examin());
         }
         [Fact]
         public void examineGum()
         {
-            Assert.Equal("Gum prise:12kr position: 3", gum.Examin());
+            Assert.Equal("Gum type:Gum prise:12kr position: 3", gum.Examin());
         }
-
-    }
+        [Theory]
+        [InlineData("Drink", "sos", 1, "sos")]
+        public void add(string type, string name, int expect,string expect2)
+        { 
+            var prog= new Program();
+            
+            prog.addProduct(type, name);
+            foreach(var c in prog.collect)
+            {
+                Assert.Equal(expect, c.ID);
+                Assert.Equal(expect2, c.Name);
+                                
+            }
+            
+        }
+        }
 }
